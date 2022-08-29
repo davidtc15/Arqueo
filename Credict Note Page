@@ -1,0 +1,120 @@
+// Credict Note Page
+
+import 'package:carbon/helpers/utilities/widgets/carbon_custom_row_table.dart';
+import 'package:carbon/tonnage/fuelStation/alerts/creditsNotesAlert/credits_notes_alert.dart';
+
+import 'package:flutter/material.dart';
+
+import '../../../widgets.dart';
+
+class CreditsNotesPage extends StatelessWidget {
+  const CreditsNotesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CarbonCustomTableRow(children: [
+          const Text("No. Nota de Crédito",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text("Cliente", style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text("Detalle", style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text("Total", style: TextStyle(fontWeight: FontWeight.bold)),
+          TextButton(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [Icon(Icons.add), Text("Agregar")],
+            ),
+            onPressed: () => showDialog(
+                context: context,
+                builder: (context) =>
+                    const CreditsNotesAlert(title: "Nota de Crédito")),
+          ),
+          //
+        ]),
+        //
+        const Divider(),
+        //
+        Expanded(
+          child: ListView(
+            children: List.filled(
+                20,
+                const CreditItem(
+                  children: [
+                    Text("No. Nota de Crédito"),
+                    Text("Cliente"),
+                    Text("Super/Diesel/Regular"),
+                    Text("000000"),
+                  ],
+                )),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+// Credict Note Alert
+
+
+
+// bank_alert
+
+part of 'bank_alert.dart';
+
+
+class _HeaderSection extends StatelessWidget {
+  const _HeaderSection({
+    Key? key,
+    required TextEditingController referenceNumberController,
+    required TextEditingController totalAmountController,
+  }) : 
+  _referenceNumberController = referenceNumberController, 
+  _totalAmountController = totalAmountController, super(key: key);
+
+  final TextEditingController _referenceNumberController;
+  final TextEditingController _totalAmountController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+
+        Expanded(
+          child: SizedBox(
+            height: 32,
+            child: TextField(
+              controller: _referenceNumberController,
+              decoration: const InputDecoration(
+                label: Text("Numero de Referencia")
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8,),
+
+        Expanded(
+          child: SizedBox(
+            height: 32,
+            child: TextField(
+              controller: _totalAmountController,
+              decoration: const InputDecoration(
+                label: Text("Monto en C\$")
+              ),
+            ),
+          ),
+        ),
+
+        TextButton(
+          onPressed: (){}, 
+          child: Row(
+            children: const [
+              Icon(Icons.add),
+              Text("Agregar")
+            ],
+          )
+        )
+      ],
+    );
+  }
+}
